@@ -1,5 +1,5 @@
 import React from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createHashRouter, RouterProvider } from 'react-router-dom'
 import MainLayout from './Layout/MainLayout/MainLayout'
 import Products from './Componets/Products/Products'
 import Brands from './Componets/Brands/Brands'
@@ -33,7 +33,7 @@ import ResetPassword from './Componets/ResetPassword/ResetPassword'
 
 export default function() {
 
-  let routes = createBrowserRouter([
+  let routes = createHashRouter([
     {   path: '/', element: <MainLayout/>,children: [
         {index:true , element: <ProtectRoutes> <Home/> </ProtectRoutes>  },
          { path:'home', element:  <ProtectRoutes> <Home/> </ProtectRoutes>},
