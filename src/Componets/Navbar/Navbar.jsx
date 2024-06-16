@@ -8,12 +8,12 @@ export default function Navbar() {
   let { wishCounter, setWishCounter, getWishlist } = useContext(wishContext);
   useEffect(() => {
     (async () => {
-      let { data } = await getCart();
+      let  data  = await getCart();
       let response = await getWishlist();
       // console.log(data);
       // console.log(response.data);
-      setCounter(data.numOfCartItems);
-      setWishCounter(response.data.count);
+      setCounter(response.data.numOfCartItems);
+      // setWishCounter(response.data.count);
       // console.log(response.data.count);
     })();
   }, []);
@@ -39,32 +39,13 @@ export default function Navbar() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link
-                  className="nav-link "
+                  className="nav-link active"
                   aria-current="page"
                   to="/home"
                 >
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link "
-                  aria-current="page"
-                  to="/cart"
-                >
-                 cart
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link "
-                  aria-current="page"
-                  to="/wishlist"
-                >
-              wish list
-                </Link>
-              </li>
-
 
               <li className="nav-item">
                 <Link className="nav-link" to="/products">
@@ -85,6 +66,7 @@ export default function Navbar() {
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item position-relative">
                 <Link className="nav-link " aria-current="page" to="/cart">
+                  {/* Cart */}
                   <i className="fa-solid fa-cart-shopping px-2 fs-4"></i>
                   {counter ? (
                     <span className="position-absolute top-1  translate-middle badge rounded-pill bg-danger">
@@ -96,10 +78,19 @@ export default function Navbar() {
                   )}
                 </Link>
               </li>
-         
+              <li className="nav-item position-relative">
+                <Link className="nav-link " aria-current="page" to="/wishlist">
+                  WishList
+                  <i className="fa-solid red fa-heart px-2 fs-5"></i>
+                  {/* <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {wishCounter}
+                    <span className="visually-hidden">unread messages</span>
+                  </span> */}
+                </Link>
+              </li>
               <li className="nav-item position-relative">
                 <Link className="nav-link " aria-current="page" to="/signin">
-                  SignOut
+                  logOut
                 </Link>
               </li>
             </ul>
