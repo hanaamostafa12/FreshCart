@@ -3,10 +3,11 @@ import { cartContext } from "../Context/CartContext";
 import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { clear } from "@testing-library/user-event/dist/clear";
 
 export default function Cart() {
-  let { getCart, deleteItem, setCounter, updateQuantity } =useContext(cartContext);
+  let { getCart, deleteItem, setCounter, updateQuantity, clearAll } =
+    useContext(cartContext);
   let [data, setData] = useState([]);
   let [loading, setLoading] = useState(true);
 
@@ -32,18 +33,16 @@ export default function Cart() {
       setData(data);
     }
   }
-  async function clearCart(){
-    const {data} = await axios.delete("https://ecommerce.routemisr.com/api/v1/cart" ,
-    {
-     headers:{
-         token: localStorage.getItem("token"),
-   
-     }
-    } )
-    console.log(data);
-    setData(data);
-   }
 
+  // async function clearCart() {
+  //   let { data } = await clearAll();
+  //   // console.log(data);
+  //   if (data.status == "success") {
+  //     toast.error("Cart deleted successfully");
+  //     // setCounter(data.numOfCartItems);
+  //     // setData(data);
+  //   }
+  // }
   async function updateProdQuantity(id, count) {
     let { data } = await updateQuantity(id, count);
     console.log(data);
@@ -127,16 +126,14 @@ export default function Cart() {
                 </button>
               </div>
             </div>
-           
           </div>
         );
       })}
-      <div className="text-center my-3">
-      <button  className="btn brdr px-5 fw-bold py-2">
+      {/* <div className="text-center my-3">
+      <button onClick={()=>clearCart()} className="btn brdr px-5 fw-bold py-2">
               Clear Your Cart
             </button>
-      </div>
-      
+      </div> */}
     </div>
   );
 }
